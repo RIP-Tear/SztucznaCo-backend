@@ -1,0 +1,19 @@
+{
+  "name": "sztucznaco-backend",
+  "version": "1.0.0",
+  "description": "Backend for SztucznaCo blog with GraphQL and PostgreSQL",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+"dependencies": {
+  "apollo-server-express": "^3.13.0",
+  "dotenv": "^16.5.0",
+  "express": "^4.18.2",
+  "graphql": "^16.11.0",
+  "pg": "^8.16.0"
+},
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
