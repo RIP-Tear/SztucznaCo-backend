@@ -62,6 +62,10 @@ const servicesMutation = {
     const result = await pool.query(query, values);
     return result.rows[0];
   },
+  deleteService: async (_, { uuid }) => {
+    await pool.query(`DELETE FROM services WHERE uuid = $1`, [uuid]);
+    return true;
+  },
 };
 
 module.exports = servicesMutation;

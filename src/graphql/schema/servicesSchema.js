@@ -42,6 +42,8 @@ const servicesTypeDefs = gql`
       profitsDescription: [String]
       tooltip: String
     ): Service
+
+    deleteService(uuid: String!): Boolean
   }
 `;
 

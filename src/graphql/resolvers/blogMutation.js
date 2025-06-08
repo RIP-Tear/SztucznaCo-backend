@@ -52,6 +52,10 @@ const blogMutation = {
     const result = await pool.query(query, values);
     return result.rows[0];
   },
+  deleteBlog: async (_, { uuid }) => {
+    await pool.query(`DELETE FROM blog WHERE uuid = $1`, [uuid]);
+    return true;
+  },
 };
 
 module.exports = blogMutation;

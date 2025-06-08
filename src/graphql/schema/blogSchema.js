@@ -39,6 +39,8 @@ const blogTypeDefs = gql`
       image: String
       public: Boolean
     ): Blog
+
+    deleteBlog(uuid: String!): Boolean
   }
 `;
 
