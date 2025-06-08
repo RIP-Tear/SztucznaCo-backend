@@ -32,6 +32,18 @@ const servicesTypeDefs = gql`
       profitsDescription: JSON
       tooltip: String
     ): Service
+
+    updateService(
+      uuid: String!
+      title: String
+      description: String
+      public: Boolean
+      content: JSON
+      contentIcon: JSON
+      profitsTitle: JSON
+      profitsDescription: JSON
+      tooltip: String
+    ): Service
   }
 `;
 

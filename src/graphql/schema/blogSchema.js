@@ -30,6 +30,17 @@ const blogTypeDefs = gql`
       image: String
       public: Boolean
     ): Blog
+
+    updateBlog(
+      uuid: String!
+      author: String
+      views: Int
+      tags: JSON
+      title: String
+      text: String
+      image: String
+      public: Boolean
+    ): Blog
   }
 `;
 
