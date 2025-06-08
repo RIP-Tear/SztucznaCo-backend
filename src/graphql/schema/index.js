@@ -1,9 +1,9 @@
-const { gql } = require("apollo-server-express");
-const testDataTypeDefs = require("./testDataSchema");
+const blogTypeDefs = require("./blogSchema");
+const servicesTypeDefs = require("./servicesSchema");
 
 const typeDefs = [
-  testDataTypeDefs
-  // tutaj potem będziesz dodawać kolejne: userTypeDefs, postTypeDefs itd.
+  blogTypeDefs,
+  servicesTypeDefs
 ];
 
 module.exports = typeDefs;
