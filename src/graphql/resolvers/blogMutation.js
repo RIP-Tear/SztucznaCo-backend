@@ -7,14 +7,14 @@ const blogMutation = {
     const createdAt = new Date().toISOString();
 
     const result = await pool.query(
-      `INSERT INTO blog ("uuid", "createdAt", "author", "views", "tags", "title", "text", "image", "public")
-   VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *`,
+      `INSERT INTO blog ("uuid", "createdAt", author, views, tags, title, text, image, public)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *`,
       [
         uuid,
         createdAt,
         args.author,
         args.views,
-        JSON.stringify(args.tags),
+        args.tags,
         args.title,
         args.text,
         args.image,
@@ -34,7 +34,7 @@ const blogMutation = {
 
     for (const [key, value] of Object.entries(fields)) {
       setClauses.push(`${key} = $${index}`);
-      values.push(key === "tags" ? JSON.stringify(value) : value);
+      values.push(value);
       index++;
     }
 

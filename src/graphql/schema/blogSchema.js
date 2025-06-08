@@ -1,15 +1,13 @@
 const { gql } = require("apollo-server-express");
 
 const blogTypeDefs = gql`
-  scalar JSON
-
   type Blog {
     id: ID!
     uuid: String!
     createdAt: String
     author: String
     views: Int
-    tags: JSON
+    tags: [String]
     title: String
     text: String
     image: String
@@ -24,7 +22,7 @@ const blogTypeDefs = gql`
     addBlog(
       author: String
       views: Int
-      tags: JSON
+      tags: [String]
       title: String
       text: String
       image: String
@@ -35,7 +33,7 @@ const blogTypeDefs = gql`
       uuid: String!
       author: String
       views: Int
-      tags: JSON
+      tags: [String]
       title: String
       text: String
       image: String

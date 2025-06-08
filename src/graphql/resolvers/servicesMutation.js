@@ -8,18 +8,18 @@ const servicesMutation = {
 
     const result = await pool.query(
       `INSERT INTO services 
-    (uuid, "createdAt", title, description, public, content, "contentIcon", "profitsTitle", "profitsDescription", tooltip)
-   VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *`,
+        (uuid, "createdAt", title, description, public, content, "contentIcon", "profitsTitle", "profitsDescription", tooltip)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *`,
       [
         uuid,
         createdAt,
         args.title,
         args.description,
         args.public,
-        JSON.stringify(args.content),
-        JSON.stringify(args.contentIcon),
-        JSON.stringify(args.profitsTitle),
-        JSON.stringify(args.profitsDescription),
+        args.content,
+        args.contentIcon,
+        args.profitsTitle,
+        args.profitsDescription,
         args.tooltip,
       ]
     );
@@ -44,13 +44,7 @@ const servicesMutation = {
     for (const [key, value] of Object.entries(fields)) {
       const columnName = columnMap[key] || key;
       setClauses.push(`${columnName} = $${index}`);
-      const jsonFields = [
-        "content",
-        "contentIcon",
-        "profitsTitle",
-        "profitsDescription",
-      ];
-      values.push(jsonFields.includes(key) ? JSON.stringify(value) : value);
+      values.push(value);
       index++;
     }
 

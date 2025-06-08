@@ -1,8 +1,6 @@
 const { gql } = require("apollo-server-express");
 
 const servicesTypeDefs = gql`
-  scalar JSON
-
   type Service {
     id: ID!
     uuid: String!
@@ -10,10 +8,10 @@ const servicesTypeDefs = gql`
     title: String
     description: String
     public: Boolean
-    content: JSON
-    contentIcon: JSON
-    profitsTitle: JSON
-    profitsDescription: JSON
+    content: [String]
+    contentIcon: [String]
+    profitsTitle: [String]
+    profitsDescription: [String]
     tooltip: String
   }
 
@@ -26,10 +24,10 @@ const servicesTypeDefs = gql`
       title: String
       description: String
       public: Boolean
-      content: JSON
-      contentIcon: JSON
-      profitsTitle: JSON
-      profitsDescription: JSON
+      content: [String]
+      contentIcon: [String]
+      profitsTitle: [String]
+      profitsDescription: [String]
       tooltip: String
     ): Service
 
@@ -38,10 +36,10 @@ const servicesTypeDefs = gql`
       title: String
       description: String
       public: Boolean
-      content: JSON
-      contentIcon: JSON
-      profitsTitle: JSON
-      profitsDescription: JSON
+      content: [String]
+      contentIcon: [String]
+      profitsTitle: [String]
+      profitsDescription: [String]
       tooltip: String
     ): Service
   }
