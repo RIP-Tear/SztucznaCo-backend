@@ -10,6 +10,8 @@ const resolversArray = require("./graphql/resolvers");
 const typeDefs = mergeTypeDefs(typeDefsArray);
 const resolvers = mergeResolvers(resolversArray);
 
+const PORT = process.env.PORT || 4000;
+
 async function startServer() {
   const app = express();
 
@@ -29,8 +31,12 @@ async function startServer() {
 
   server.applyMiddleware({ app, path: "/graphql" });
 
-  const PORT = process.env.PORT || 4000;
+  app.get("/", (req, res) => {
+    res.send("Backend działa 🚀");
+  });
+
   app.listen(PORT, () => {
+    console.log(`✅ Railway PORT: ${PORT}`);
     console.log(
       `🚀 Server ready at http://localhost:${PORT}${server.graphqlPath}`
     );
