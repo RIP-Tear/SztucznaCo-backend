@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node src/index.js",
-    "dev": "nodemon src/index.js"
+    "dev": "concurrently \"nodemon src/index.js\" \"npx open-cli http://localhost:4000/graphql\""
   },
   "dependencies": {
     "@graphql-tools/merge": "^9.0.24",
@@ -21,6 +21,9 @@
     "node": ">=18.0.0"
   },
   "devDependencies": {
-    "nodemon": "^3.1.10"
+    "concurrently": "^9.1.2",
+    "nodemon": "^3.1.10",
+    "open": "^10.1.2",
+    "open-cli": "^8.0.0"
   }
 }
