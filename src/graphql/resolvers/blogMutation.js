@@ -13,7 +13,7 @@ const blogMutation = {
         uuid,
         createdAt,
         args.author,
-        args.views,
+        0,
         args.tags,
         args.title,
         args.text,
@@ -24,9 +24,11 @@ const blogMutation = {
 
     return result.rows[0];
   },
-
   updateBlog: async (_, args) => {
     const { uuid, ...fields } = args;
+
+    delete fields.views;
+    delete fields.createdAt;
 
     const setClauses = [];
     const values = [];
@@ -43,18 +45,36 @@ const blogMutation = {
     }
 
     const query = `
-      UPDATE blog SET ${setClauses.join(", ")} 
-      WHERE uuid = $${index}
-      RETURNING *`;
+    UPDATE blog SET ${setClauses.join(", ")} 
+    WHERE uuid = $${index}
+    RETURNING *`;
 
     values.push(uuid);
 
     const result = await pool.query(query, values);
     return result.rows[0];
   },
+
   deleteBlog: async (_, { uuid }) => {
     await pool.query(`DELETE FROM blog WHERE uuid = $1`, [uuid]);
     return true;
+  },
+  incrementBlogViews: async (_, { uuid }) => {
+    const result = await pool.query(
+      `
+    UPDATE blog
+    SET views = views + 1
+    WHERE uuid = $1
+    RETURNING *;
+  `,
+      [uuid]
+    );
+
+    if (result.rows.length === 0) {
+      throw new Error("Nie znaleziono posta o podanym UUID.");
+    }
+
+    return result.rows[0];
   },
 };
 

@@ -21,7 +21,6 @@ const blogTypeDefs = gql`
   type Mutation {
     addBlog(
       author: String
-      views: Int
       tags: [String]
       title: String
       text: String
@@ -32,7 +31,6 @@ const blogTypeDefs = gql`
     updateBlog(
       uuid: String!
       author: String
-      views: Int
       tags: [String]
       title: String
       text: String
@@ -41,6 +39,7 @@ const blogTypeDefs = gql`
     ): Blog
 
     deleteBlog(uuid: String!): Boolean
+    incrementBlogViews(uuid: String!): Blog
   }
 `;
 
