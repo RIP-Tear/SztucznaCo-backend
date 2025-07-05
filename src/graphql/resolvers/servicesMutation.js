@@ -8,8 +8,9 @@ const servicesMutation = {
 
     const result = await pool.query(
       `INSERT INTO services 
-        (uuid, "createdAt", title, description, public, content, "contentIcon", "profitsTitle", "profitsDescription", tooltip)
-       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *`,
+    (uuid, "createdAt", title, description, public, content, "contentIcon", "profitsTitle", "profitsDescription", tooltip, "linkOrder")
+   VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
+   RETURNING *`,
       [
         uuid,
         createdAt,
@@ -21,7 +22,7 @@ const servicesMutation = {
         args.profitsTitle,
         args.profitsDescription,
         args.tooltip,
-        args.linkOrder
+        args.linkOrder,
       ]
     );
 
@@ -40,6 +41,7 @@ const servicesMutation = {
       profitsTitle: '"profitsTitle"',
       profitsDescription: '"profitsDescription"',
       createdAt: '"createdAt"',
+      linkOrder: '"linkOrder"',
     };
 
     for (const [key, value] of Object.entries(fields)) {
