@@ -13,6 +13,7 @@ const servicesTypeDefs = gql`
     profitsTitle: [String]
     profitsDescription: [String]
     tooltip: String
+    linkOrder: String
   }
 
   type Query {
@@ -29,6 +30,7 @@ const servicesTypeDefs = gql`
       profitsTitle: [String]
       profitsDescription: [String]
       tooltip: String
+      linkOrder: String
     ): Service
 
     updateService(
@@ -41,6 +43,7 @@ const servicesTypeDefs = gql`
       profitsTitle: [String]
       profitsDescription: [String]
       tooltip: String
+      linkOrder: String
     ): Service
 
     deleteService(uuid: String!): Boolean

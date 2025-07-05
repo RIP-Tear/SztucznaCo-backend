@@ -21,6 +21,7 @@ const servicesMutation = {
         args.profitsTitle,
         args.profitsDescription,
         args.tooltip,
+        args.linkOrder
       ]
     );
 
