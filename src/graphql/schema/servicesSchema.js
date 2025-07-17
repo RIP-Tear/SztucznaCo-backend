@@ -8,10 +8,7 @@ const servicesTypeDefs = gql`
     title: String
     description: String
     public: Boolean
-    content: [String]
-    contentIcon: [String]
-    profitsTitle: [String]
-    profitsDescription: [String]
+    titleButton: String
     tooltip: String
     linkOrder: String
   }
@@ -22,13 +19,11 @@ const servicesTypeDefs = gql`
 
   type Mutation {
     addService(
+      uuid: String!
       title: String
       description: String
       public: Boolean
-      content: [String]
-      contentIcon: [String]
-      profitsTitle: [String]
-      profitsDescription: [String]
+      titleButton: String
       tooltip: String
       linkOrder: String
     ): Service
@@ -38,10 +33,7 @@ const servicesTypeDefs = gql`
       title: String
       description: String
       public: Boolean
-      content: [String]
-      contentIcon: [String]
-      profitsTitle: [String]
-      profitsDescription: [String]
+      titleButton: String
       tooltip: String
       linkOrder: String
     ): Service

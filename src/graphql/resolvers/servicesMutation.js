@@ -1,26 +1,21 @@
 const pool = require("../../db/pool");
-const { v4: uuidv4 } = require("uuid");
 
 const servicesMutation = {
   addService: async (_, args) => {
-    const uuid = uuidv4();
     const createdAt = new Date().toISOString();
 
     const result = await pool.query(
       `INSERT INTO services 
-    (uuid, "createdAt", title, description, public, content, "contentIcon", "profitsTitle", "profitsDescription", tooltip, "linkOrder")
-   VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
-   RETURNING *`,
+      (uuid, "createdAt", title, description, public, "titleButton", tooltip, "linkOrder")
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+      RETURNING *`,
       [
-        uuid,
+        args.uuid, // <- przekazane z frontu
         createdAt,
         args.title,
         args.description,
         args.public,
-        args.content,
-        args.contentIcon,
-        args.profitsTitle,
-        args.profitsDescription,
+        args.titleButton,
         args.tooltip,
         args.linkOrder,
       ]
@@ -37,10 +32,8 @@ const servicesMutation = {
     let index = 1;
 
     const columnMap = {
-      contentIcon: '"contentIcon"',
-      profitsTitle: '"profitsTitle"',
-      profitsDescription: '"profitsDescription"',
       createdAt: '"createdAt"',
+      titleButton: '"titleButton"',
       linkOrder: '"linkOrder"',
     };
 
@@ -65,6 +58,7 @@ const servicesMutation = {
     const result = await pool.query(query, values);
     return result.rows[0];
   },
+
   deleteService: async (_, { uuid }) => {
     await pool.query(`DELETE FROM services WHERE uuid = $1`, [uuid]);
     return true;
