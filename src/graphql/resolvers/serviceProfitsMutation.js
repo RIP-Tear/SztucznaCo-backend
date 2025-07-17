@@ -5,20 +5,37 @@ const serviceProfitsMutation = {
   addProfitItem: async (_, args) => {
     const uuid = uuidv4();
 
+    const fields = [
+      "uuid",
+      '"uuidService"',
+      '"profitsTitle"',
+      '"profitsDescription"',
+      '"profitsButton"',
+      '"profitsLink"',
+    ];
+    const values = [
+      uuid,
+      args.uuidService,
+      args.profitsTitle,
+      args.profitsDescription,
+      args.profitsButton,
+      args.profitsLink,
+    ];
+    const placeholders = ["$1", "$2", "$3", "$4", "$5", "$6"];
+    let paramIndex = 7;
+
+    if (typeof args.profitsIndex === "number") {
+      fields.push('"profitsIndex"');
+      values.push(args.profitsIndex);
+      placeholders.push(`$${paramIndex}`);
+      paramIndex++;
+    }
+
     const result = await pool.query(
-      `INSERT INTO service_profits 
-      (uuid, "uuidService", "profitsTitle", "profitsDescription", "profitsIndex", "profitsButton", "profitsLink")
-      VALUES ($1, $2, $3, $4, $5, $6, $7)
-      RETURNING *`,
-      [
-        uuid,
-        args.uuidService,
-        args.profitsTitle,
-        args.profitsDescription,
-        args.profitsIndex,
-        args.profitsButton,
-        args.profitsLink,
-      ]
+      `INSERT INTO service_profits (${fields.join(", ")})
+     VALUES (${placeholders.join(", ")})
+     RETURNING *`,
+      values
     );
 
     return result.rows[0];

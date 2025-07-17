@@ -5,18 +5,28 @@ const serviceContentMutation = {
   addContentItem: async (_, args) => {
     const uuid = uuidv4();
 
+    const fields = ["uuid", '"uuidService"', '"contentTitle"', '"contentIcon"'];
+    const values = [
+      uuid,
+      args.uuidService,
+      args.contentTitle,
+      args.contentIcon,
+    ];
+    const placeholders = ["$1", "$2", "$3", "$4"];
+    let paramIndex = 5;
+
+    if (typeof args.contentIndex === "number") {
+      fields.push('"contentIndex"');
+      values.push(args.contentIndex);
+      placeholders.push(`$${paramIndex}`);
+      paramIndex++;
+    }
+
     const result = await pool.query(
-      `INSERT INTO service_content 
-      (uuid, "uuidService", "contentTitle", "contentIcon", "contentIndex")
-      VALUES ($1, $2, $3, $4, $5)
-      RETURNING *`,
-      [
-        uuid,
-        args.uuidService,
-        args.contentTitle,
-        args.contentIcon,
-        args.contentIndex,
-      ]
+      `INSERT INTO service_content (${fields.join(", ")})
+     VALUES (${placeholders.join(", ")})
+     RETURNING *`,
+      values
     );
 
     return result.rows[0];
