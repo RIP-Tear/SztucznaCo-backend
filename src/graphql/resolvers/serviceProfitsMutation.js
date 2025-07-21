@@ -7,8 +7,8 @@ const serviceProfitsMutation = {
 
     const result = await pool.query(
       `INSERT INTO service_profits 
-      (uuid, "uuidService", "profitsTitle", "profitsDescription", "profitsIndex", "profitsButton", "profitsLink")
-      VALUES ($1, $2, $3, $4, $5, $6, $7)
+      (uuid, "uuidService", "profitsTitle", "profitsDescription", "profitsIndex")
+      VALUES ($1, $2, $3, $4, $5)
       RETURNING *`,
       [
         uuid,
@@ -16,8 +16,6 @@ const serviceProfitsMutation = {
         args.profitsTitle,
         args.profitsDescription,
         args.profitsIndex,
-        args.profitsButton,
-        args.profitsLink,
       ]
     );
 

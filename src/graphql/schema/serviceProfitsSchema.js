@@ -7,8 +7,6 @@ const serviceProfitsTypeDefs = gql`
     profitsTitle: String
     profitsDescription: String
     profitsIndex: Int
-    profitsButton: String
-    profitsLink: String
   }
 
   type Query {
@@ -21,8 +19,6 @@ const serviceProfitsTypeDefs = gql`
       profitsTitle: String
       profitsDescription: String
       profitsIndex: Int
-      profitsButton: String
-      profitsLink: String
     ): ProfitItem
 
     updateProfitItem(
@@ -30,8 +26,6 @@ const serviceProfitsTypeDefs = gql`
       profitsTitle: String
       profitsDescription: String
       profitsIndex: Int
-      profitsButton: String
-      profitsLink: String
     ): ProfitItem
 
     deleteProfitItem(uuid: String!): Boolean
