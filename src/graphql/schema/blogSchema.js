@@ -12,6 +12,7 @@ const blogTypeDefs = gql`
     text: String
     image: String
     public: Boolean
+    metaDescription: String 
   }
 
   type Query {
@@ -26,6 +27,7 @@ const blogTypeDefs = gql`
       text: String
       image: String
       public: Boolean
+      metaDescription: String 
     ): Blog
 
     updateBlog(
@@ -36,6 +38,7 @@ const blogTypeDefs = gql`
       text: String
       image: String
       public: Boolean
+      metaDescription: String 
     ): Blog
 
     deleteBlog(uuid: String!): Boolean
